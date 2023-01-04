@@ -15,7 +15,9 @@ type SeekableBuffer struct {
 	// past the end will add zeros to the necessary size.
 	Data []byte
 	// The current read or write offset in the file. It's an error to read past
-	// the end of the data, but writing pas
+	// the end of the data, but writing past (using Write()) will expand the
+	// capacity and zero-fill any previous unwritten space (if skipped using
+	// Seek()).
 	Offset int64
 }
 

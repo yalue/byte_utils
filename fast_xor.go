@@ -16,11 +16,11 @@ func SimpleXor(dst, a, b []byte) {
 }
 
 // Used to xor byte slices a and b, writing the result into dst. Based on
-// github.com/golang/go/issues/31586#issuecomment-487436401. Panics b and dst
-// aren't at least as long as a. It's valid for dst to be the same as either a
-// or b. Benchmarks on my machine (tm) indicate that this is over 3x faster
-// than SimpleXor alone for 1 MB slices, though this may change depending on
-// architecture.
+// github.com/golang/go/issues/31586#issuecomment-487436401. Panics if b and
+// dst aren't at least as long as a (the length of the operation is determined
+// by len(a).  It's valid for dst to be the same as either a or b. Benchmarks
+// on my machine (tm) indicate that this is over 3x faster than SimpleXor alone
+// for 1 MB slices, though this may change depending on architecture.
 func FastXor(dst, a, b []byte) {
 	n := binary.LittleEndian
 	var x, y uint64
